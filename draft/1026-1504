@@ -1,0 +1,320 @@
+login status: 200
+login status: 200
+---A---------------
+----text {
+  "http_method":"GET",
+  "revision":"1540533896.552646",
+  "results":{
+    "mgmt":{  <--------------
+      "id":"mgmt",  <--------------
+      "name":"mgmt",
+      "alias":"",
+      "mac":"00:00:00:00:00:00",
+      "ip":"172.30.219.72",  <--------------
+      "mask":24,
+      "link":true,
+      "speed":10000.000000,
+      "duplex":1,
+      "tx_packets":6865675,
+      "rx_packets":27734893,
+      "tx_bytes":787317249,  <--------------
+      "rx_bytes":10781440324,  <--------------
+      "tx_errors":0,
+      "rx_errors":0
+    },
+    "port1":{  <--------------
+      "id":"port1",  <--------------
+      "name":"port1",
+      "alias":"",
+      "mac":"00:00:00:00:00:00",
+      "ip":"192.168.122.3",  <--------------
+      "mask":24,
+      "link":true,
+      "speed":10000.000000,
+      "duplex":1,
+      "tx_packets":69670,
+      "rx_packets":1740982,
+      "tx_bytes":12521505,  <--------------
+      "rx_bytes":93222237,  <--------------
+      "tx_errors":0,
+      "rx_errors":0
+    },
+    "port2":{
+      "id":"port2",
+      "name":"port2",
+      "alias":"",
+      "mac":"00:00:00:00:00:00",
+      "ip":"0.0.0.0",
+      "mask":0,
+      "link":true,
+      "speed":10000.000000,
+      "duplex":1,
+      "tx_packets":5,
+      "rx_packets":1688746,
+      "tx_bytes":462,
+      "rx_bytes":87917121,
+      "tx_errors":0,
+      "rx_errors":0
+    },
+    "port3":{
+      "id":"port3",
+      "name":"port3",
+      "alias":"",
+      "mac":"00:00:00:00:00:00",
+      "ip":"0.0.0.0",
+      "mask":0,
+      "link":true,
+      "speed":10000.000000,
+      "duplex":1,
+      "tx_packets":3,
+      "rx_packets":1688748,
+      "tx_bytes":274,
+      "rx_bytes":87917309,
+      "tx_errors":0,
+      "rx_errors":0
+    },
+    "port4":{
+      "id":"port4",
+      "name":"port4",
+      "alias":"",
+      "mac":"00:00:00:00:00:00",
+      "ip":"0.0.0.0",
+      "mask":0,
+      "link":true,
+      "speed":10000.000000,
+      "duplex":1,
+      "tx_packets":5,
+      "rx_packets":1688746,
+      "tx_bytes":462,
+      "rx_bytes":87917121,
+      "tx_errors":0,
+      "rx_errors":0
+    },
+    "port5":{  <--------------
+      "id":"port5",  <--------------
+      "name":"port5",
+      "alias":"",
+      "mac":"00:00:00:00:00:00",
+      "ip":"1.1.16.1",  <--------------
+      "mask":30,
+      "link":true,
+      "speed":10000.000000,
+      "duplex":1,
+      "tx_packets":7,
+      "rx_packets":1688744,
+      "tx_bytes":650,  <--------------
+      "rx_bytes":87916933,  <--------------
+      "tx_errors":0,
+      "rx_errors":0
+    }
+  },
+  "vdom":"root",
+  "path":"system",
+  "name":"interface",
+  "status":"success",
+  "serial":"FOSVM1CYE6PL8U60",
+  "version":"v6.0.1",
+  "build":131
+}
+######## 1540533896.552646
+{u'mgmt': {u'alias': u'',  <--------------
+           u'duplex': 1,
+           u'id': u'mgmt',  <--------------
+           u'ip': u'172.30.219.72',  <--------------
+           u'link': True,
+           u'mac': u'00:00:00:00:00:00',
+           u'mask': 24,
+           u'name': u'mgmt',
+           u'rx_bytes': 10781440324,  <--------------
+           u'rx_errors': 0,
+           u'rx_packets': 27734893,
+           u'speed': 10000.0,
+           u'tx_bytes': 787317249,  <--------------
+           u'tx_errors': 0,
+           u'tx_packets': 6865675},
+ u'port1': {u'alias': u'',  <--------------
+            u'duplex': 1,
+            u'id': u'port1',  <--------------
+            u'ip': u'192.168.122.3',  <--------------
+            u'link': True,
+            u'mac': u'00:00:00:00:00:00',
+            u'mask': 24,
+            u'name': u'port1',
+            u'rx_bytes': 93222237,  <--------------
+            u'rx_errors': 0,
+            u'rx_packets': 1740982,
+            u'speed': 10000.0,
+            u'tx_bytes': 12521505,  <--------------
+            u'tx_errors': 0,
+            u'tx_packets': 69670},
+ u'port2': {u'alias': u'',
+            u'duplex': 1,
+            u'id': u'port2',
+            u'ip': u'0.0.0.0',
+            u'link': True,
+            u'mac': u'00:00:00:00:00:00',
+            u'mask': 0,
+            u'name': u'port2',
+            u'rx_bytes': 87917121,
+            u'rx_errors': 0,
+            u'rx_packets': 1688746,
+            u'speed': 10000.0,
+            u'tx_bytes': 462,
+            u'tx_errors': 0,
+            u'tx_packets': 5},
+ u'port3': {u'alias': u'',
+            u'duplex': 1,
+            u'id': u'port3',
+            u'ip': u'0.0.0.0',
+            u'link': True,
+            u'mac': u'00:00:00:00:00:00',
+            u'mask': 0,
+            u'name': u'port3',
+            u'rx_bytes': 87917309,
+            u'rx_errors': 0,
+            u'rx_packets': 1688748,
+            u'speed': 10000.0,
+            u'tx_bytes': 274,
+            u'tx_errors': 0,
+            u'tx_packets': 3},
+ u'port4': {u'alias': u'',
+            u'duplex': 1,
+            u'id': u'port4',
+            u'ip': u'0.0.0.0',
+            u'link': True,
+            u'mac': u'00:00:00:00:00:00',
+            u'mask': 0,
+            u'name': u'port4',
+            u'rx_bytes': 87917121,
+            u'rx_errors': 0,
+            u'rx_packets': 1688746,
+            u'speed': 10000.0,
+            u'tx_bytes': 462,
+            u'tx_errors': 0,
+            u'tx_packets': 5},
+ u'port5': {u'alias': u'',
+            u'duplex': 1,
+            u'id': u'port5',
+            u'ip': u'1.1.16.1',
+            u'link': True,
+            u'mac': u'00:00:00:00:00:00',
+            u'mask': 30,
+            u'name': u'port5',
+            u'rx_bytes': 87916933,
+            u'rx_errors': 0,
+            u'rx_packets': 1688744,
+            u'speed': 10000.0,
+            u'tx_bytes': 650,
+            u'tx_errors': 0,
+            u'tx_packets': 7}}
+---B---------------
+----text {
+  "http_method":"GET",
+  "revision":"1540533896.558872",
+  "results":{
+    "mgmt":{  <--------------
+      "id":"mgmt",  <--------------
+      "name":"mgmt",
+      "alias":"",
+      "mac":"00:00:00:00:00:00",
+      "ip":"172.30.219.73",  <--------------
+      "mask":24,
+      "link":true,
+      "speed":10000.000000,
+      "duplex":1,
+      "tx_packets":3937996,
+      "rx_packets":23320134,
+      "tx_bytes":559189072,  <--------------
+      "rx_bytes":4640518748,  <--------------
+      "tx_errors":0,
+      "rx_errors":0
+    },
+    "port1":{  <--------------
+      "id":"port1",  <--------------
+      "name":"port1",
+      "alias":"",
+      "mac":"00:00:00:00:00:00",
+      "ip":"192.168.122.4",  <--------------
+      "mask":24,
+      "link":true,
+      "speed":10000.000000,
+      "duplex":1,
+      "tx_packets":2320,
+      "rx_packets":1691723,
+      "tx_bytes":141609,  <--------------
+      "rx_bytes":88071553,  <--------------
+      "tx_errors":0,
+      "rx_errors":0
+    },
+    "port2":{
+      "id":"port2",
+      "name":"port2",
+      "alias":"",
+      "mac":"00:00:00:00:00:00",
+      "ip":"0.0.0.0",
+      "mask":0,
+      "link":true,
+      "speed":10000.000000,
+      "duplex":1,
+      "tx_packets":1,
+      "rx_packets":1691534,
+      "tx_bytes":90,
+      "rx_bytes":88063639,
+      "tx_errors":0,
+      "rx_errors":0
+    }
+  },
+  "vdom":"root",
+  "path":"system",
+  "name":"interface",
+  "status":"success",
+  "serial":"FOSVM1SOD-9KL-9C",
+  "version":"v6.0.1",
+  "build":131
+}
+######## 1540533896.558872
+{u'mgmt': {u'alias': u'',  <--------------
+           u'duplex': 1,
+           u'id': u'mgmt',  <--------------
+           u'ip': u'172.30.219.73',  <--------------
+           u'link': True,
+           u'mac': u'00:00:00:00:00:00',
+           u'mask': 24,
+           u'name': u'mgmt',
+           u'rx_bytes': 4640518748,  <--------------
+           u'rx_errors': 0,
+           u'rx_packets': 23320134,
+           u'speed': 10000.0,
+           u'tx_bytes': 559189072,  <--------------
+           u'tx_errors': 0,
+           u'tx_packets': 3937996},
+ u'port1': {u'alias': u'',
+            u'duplex': 1,
+            u'id': u'port1',
+            u'ip': u'192.168.122.4',
+            u'link': True,
+            u'mac': u'00:00:00:00:00:00',
+            u'mask': 24,
+            u'name': u'port1',
+            u'rx_bytes': 88071553,
+            u'rx_errors': 0,
+            u'rx_packets': 1691723,
+            u'speed': 10000.0,
+            u'tx_bytes': 141609,
+            u'tx_errors': 0,
+            u'tx_packets': 2320},
+ u'port2': {u'alias': u'',
+            u'duplex': 1,
+            u'id': u'port2',
+            u'ip': u'0.0.0.0',
+            u'link': True,
+            u'mac': u'00:00:00:00:00:00',
+            u'mask': 0,
+            u'name': u'port2',
+            u'rx_bytes': 88063639,
+            u'rx_errors': 0,
+            u'rx_packets': 1691534,
+            u'speed': 10000.0,
+            u'tx_bytes': 90,
+            u'tx_errors': 0,
+            u'tx_packets': 1}}
