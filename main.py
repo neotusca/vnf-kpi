@@ -2,17 +2,19 @@
 
 import elasticsearch
 from elasticsearch import helpers
-
-import get_vnf_network_kpi
 from pprint import pprint
 import json
 import time
 
+import get_vnf_network_kpi
+
 
 def json_modify(json_str):
-    dict1 = json.loads(json_str)
+    dict1 = json.loads(json_str)   # json to dictionary
+    #print dict1
 
-    for vnf in dict1.keys():
+    rslt_list = []
+    for vnf in dict1.keys():       # get vnf-name
         rslt_dict = {}
         tmp = {}
         #print vnf
@@ -22,9 +24,7 @@ def json_modify(json_str):
         #print '====================='
         #print dict1[vnf].keys()
   
-        cnt=0
         for port in dict1[vnf].keys():     # get port-list
-            print '--------------------'
             #print dict1[vnf][port]
             #print type(dict1[vnf][port])
             if 'name' in dict1[vnf][port]:   # case normal port
@@ -37,10 +37,15 @@ def json_modify(json_str):
                 rslt_dict['system'] = {}
                 rslt_dict['system']['network'] = tmp
 
-                cnt=cnt+1
-                #print '[',cnt,']'
                 #pprint (rslt_dict)
-    return rslt_dict
+                print '--------------------'
+                print '#',rslt_dict
+                rslt_list.append(rslt_dict)
+    print '*',rslt_list
+    #print '**********************'
+    #print rslt_list
+    #return rslt_dict
+    #return rslt_list
 
 
 def es_send(es_info, json):
@@ -50,19 +55,26 @@ def es_send(es_info, json):
     print json
     print '+22++++++++++'
     docs = []
+
+    print docs, type(docs)
+
+
+
+    '''
     for cnt in range(10):
         docs.append({
-            '_index': 'bank_version1',
-            '_type': 'account',
-            '_id': 'new_id_' + str(cnt),
+            '_index': 'vnf-kpi4',
+            '_type': 'metricsets',
             '_source': {
                 'state': 'NY'
             }
         })
+    '''
 
+    print docs
     #_result = elasticsearch.helpers.bulk(es_client, docs)
-    print '+++++++++++'
-    print _result
+    #print '+++++++++++'
+    #print _result
 
 
          
@@ -86,18 +98,22 @@ if __name__ == "__main__":
     #print f_info.items()
 
     ''' connect and get from fortios'''
-    #result =  get_vnf_network_kpi.get_vnf_network_kpi(f_info, a_info)
+    result =  get_vnf_network_kpi.get_vnf_network_kpi(f_info, a_info)
 
     ''' connect and get from fortios'''
-    result = jsonfile_reading('get_vnf_network_kpi_success.json')
+    #result = jsonfile_reading('get_vnf_network_kpi_success.json')
+    #print '=1=========='
     #print result
+    #print '=1=========='
     #print type(result)  # string
 
     result2 = json_modify(result)
     
-    print result2
+    #print '=2=========='
+    #print result2
+    #print '=2=========='
 
-    es_send(ES_INFO, result2)
+    #es_send(ES_INFO, result2)
 
     
     '''
