@@ -1,6 +1,7 @@
 #!/bin/python
 
-import elasticsearch
+#import elasticsearch
+from elasticsearch import Elasticsearch
 from elasticsearch import helpers
 from pprint import pprint
 import json
@@ -11,70 +12,90 @@ import get_vnf_network_kpi
 
 def json_modify(json_str):
     dict1 = json.loads(json_str)   # json to dictionary
-    #print dict1
-
     rslt_list = []
+    #rslt_dict = {}
+
+    print '~~1~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
     for vnf in dict1.keys():       # get vnf-name
-        rslt_dict = {}
+        buffer_dict = {}
         tmp = {}
-        #print vnf
-        #print dict1[vnf]['timestamp']
-        rslt_dict['@timestamp'] = dict1[vnf]['timestamp']
-        rslt_dict['vnf'] = vnf
-        #print '====================='
-        #print dict1[vnf].keys()
-  
+        buffer_dict['@timestamp'] = dict1[vnf]['timestamp']
+        buffer_dict['vnf'] = vnf
+        buffer_dict['vnf_vendor'] = 'F' # vnf_vendor : Fortinet
+        #print buffer_dict
+
+        print '~~2~~~~~~~~~~~~~~~~~~~~~~~~~~'
         for port in dict1[vnf].keys():     # get port-list
-            #print dict1[vnf][port]
+            #print '=',port,'=',dict1[vnf][port],'='
             #print type(dict1[vnf][port])
             if 'name' in dict1[vnf][port]:   # case normal port
+                #print '#',vnf,'#',port,'#',dict1[vnf][port]
                 tmp['name'] = dict1[vnf][port]['name']
                 tmp['ip'] = dict1[vnf][port]['ip']
                 tmp['in'] = {'bytes':dict1[vnf][port]['rx_bytes'], 'packets':dict1[vnf][port]['rx_packets'], 'errors':dict1[vnf][port]['rx_errors']}
                 tmp['out'] = {'bytes':dict1[vnf][port]['tx_bytes'], 'packets':dict1[vnf][port]['tx_packets'], 'errors':dict1[vnf][port]['tx_errors']}
                 #print tmp
 
-                rslt_dict['system'] = {}
-                rslt_dict['system']['network'] = tmp
+                buffer_dict['system'] = {}
+                buffer_dict['system']['network'] = tmp
 
-                #pprint (rslt_dict)
-                print '--------------------'
-                print '#',rslt_dict
-                rslt_list.append(rslt_dict)
-    print '*',rslt_list
-    #print '**********************'
-    #print rslt_list
-    #return rslt_dict
-    #return rslt_list
+                #pprint (buffer_dict)
+                #print '[',vnf,'][',port,']',buffer_dict, type(buffer_dict)
+                rslt_list.append(buffer_dict)   # add dict in list
+                print '~~3~~~~~~~~~~~~~~~~~~~~'
+                print rslt_list
 
-
-def es_send(es_info, json):
-    es_client = elasticsearch.Elasticsearch(es_info)
-
-    print '+11++++++++++'
-    print json
-    print '+22++++++++++'
-    docs = []
-
-    print docs, type(docs)
+    print '~~4~~~~~~~~~~~~~~~~~~~~'
+    print rslt_list
+    return rslt_list
 
 
+def es_send(es_info, input):
+    print "===es_send=============="
+    #print '[',es_info, type(es_info)
+    print "input : "
+    print input, type(input)  # list, not  dict
 
-    '''
-    for cnt in range(10):
-        docs.append({
-            '_index': 'vnf-kpi4',
-            '_type': 'metricsets',
-            '_source': {
-                'state': 'NY'
-            }
-        })
-    '''
+    json1 = json.dumps(input)
+    print "---"
+    print json1,type(json1)  # string
 
-    print docs
-    #_result = elasticsearch.helpers.bulk(es_client, docs)
-    #print '+++++++++++'
-    #print _result
+    #es_client = elasticsearch.Elasticsearch(es_info)
+    es_client = Elasticsearch(es_info)
+    print es_client, type(es_client)
+
+    buffer_dict1 = {}
+    buffer_dict1['_index'] = 'vnf-kpi4'
+    buffer_dict1['_type'] = 'metricsets' #({'_index':'vnf-kpi4','_type':'metricsets','_source':
+    
+    #rslt_dict1 = {}
+    rslt_list1 = []
+    str1 = ""
+
+    print "------------------------"
+    cnt=1
+    #for record in input.values():
+
+    for record in input:
+        print record
+        buffer_dict1['_source'] = record
+        #print cnt, record
+
+        #str1 = str1+json.dumps(record)
+        #print cnt, str1, type(str1)
+        print buffer_dict1,type(buffer_dict1)
+        rslt_list1.append(buffer_dict1)
+        cnt=cnt+1
+
+    print '+++++++++++'
+    #print str1, type(str1)
+    #print rslt_list1, type(rslt_list1)
+    pprint(rslt_list1)
+
+    _result = helpers.bulk(es_client, rslt_list1)    #   not string, be list
+    #_result = helpers.bulk(es_client, json1)
+    print '+++++++++++'
+    print _result
 
 
          
@@ -93,27 +114,25 @@ if __name__ == "__main__":
     f_info={'fos-01':{'ip':'172.30.219.72','pw':'admin'}, 'fos-02':{'ip':'172.30.219.73','pw':'admin'}}   # using dedicated-passwd 
     a_info={'domain':'root','id':'admin'}    # using dedicated-passwd 
     ES_INFO='172.30.219.67:9200'
-    #print f_info.keys()
-    #print f_info.values()
-    #print f_info.items()
 
     ''' connect and get from fortios'''
     result =  get_vnf_network_kpi.get_vnf_network_kpi(f_info, a_info)
 
     ''' connect and get from fortios'''
     #result = jsonfile_reading('get_vnf_network_kpi_success.json')
-    #print '=1=========='
-    #print result
-    #print '=1=========='
-    #print type(result)  # string
+    print '=1=========='
+    print result, type(result)  # string
 
     result2 = json_modify(result)
     
-    #print '=2=========='
-    #print result2
+    print '=2=========='
+    #pprint(result2)
+    print result2, type(result2)
     #print '=2=========='
 
-    #es_send(ES_INFO, result2)
+    result3 = es_send(ES_INFO, result2)
+    print '=3=========='
+    print result3, type(result3)
 
     
     '''
