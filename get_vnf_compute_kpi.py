@@ -29,34 +29,17 @@ def get_vnf_compute_kpi(FOS_INFO, ACC_INFO):
             #pprint (data)
             #print type(data)  # dict
 
-            ''' 
-            cnt=1
-            #print data['results']['cpu']['historical']['1-hour']['end']
-            print vnf,'-----------------'
-            #print data['results']['cpu'], type(data['results']['cpu'])  # list
-            for record in data['results']['cpu']:
-                print cnt, record,'-----'
-                cnt=cnt+1
-            ''' 
-
             usage['cpu']       = data['results']['cpu'][0]['current']
             usage['mem']       = data['results']['mem'][0]['current']
             usage['disk']      = data['results']['disk'][0]['current']
             usage['session']   = data['results']['session'][0]['current']
 
-
-            '''
-            timestamp = data['revision']
-            usage = data['results']
-            usage['timestamp'] = timestamp
-            '''
-
             print '+1+++++++++++++++++++++'
-            print usage
+            print vnf, usage, type(usage)
 
         
-        #TOTAL_VNF_USAGE[vnf] = usage    
-        TOTAL_VNF_USAGE[vnf].copy(usage)    # dictionary  not work
+            TOTAL_VNF_USAGE[vnf] = {}
+            TOTAL_VNF_USAGE[vnf].update(usage)    # dictionary  not work
 
         print '+2+++++++++++++++++++++'
         print TOTAL_VNF_USAGE
