@@ -1,6 +1,0 @@
-
-
-
-
-
-dict-vnf = {name

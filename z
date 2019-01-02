@@ -1,1 +1,0 @@
-{"_type": "metricsets", "_source": {"vnf": u"fos-01", "@timestamp": u"1545874352.350881", "system": {"network": {"ip": u"10.0.0.1", "out": {"packets": 1, "errors": 0, "bytes": 90}, "name": u"port1", "in": {"packets": 221017, "errors": 0, "bytes": 11511471}}}, "vnf_vendor": "F"}, "_index": "vnf-kpi4"}
