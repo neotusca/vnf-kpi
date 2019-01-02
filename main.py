@@ -20,7 +20,6 @@ def json_modify(json_str):
         #buffer_dict['@timestamp'] = dict1[vnf]['timestamp']
         #print  dict1[vnf]['timestamp'], type(  dict1[vnf]['timestamp'] )
         #print  int(float(dict1[vnf]['timestamp'])), type(  int(float(dict1[vnf]['timestamp'])) )
-
         #buffer_dict['@timestamp'] = int(float(dict1[vnf]['timestamp']))
 
         buffer_dict['@timestamp'] = time.strftime("%Y-%m-%dT%H:%M:%S",  time.gmtime( int(float(dict1[vnf]['timestamp']))))
@@ -45,24 +44,16 @@ def json_modify(json_str):
 
 
 def es_send(es_info, input):
-    #print "===es_send=============="
-    #print '[',es_info, type(es_info)
-    #print "input : "
-    #print input, type(input)  # list, not  dict
 
     json1 = json.dumps(input)
-    #print "---"
-    #print json1,type(json1)  # string
 
-    #es_client = elasticsearch.Elasticsearch(es_info)
     es_client = Elasticsearch(es_info)
-    print es_client, type(es_client)
+    #print es_client, type(es_client)
 
     buffer_dict1 = {}
     buffer_dict1['_index'] = ES_INDEX_PREFIX   # vnf-kpi, need to yyyymmdd append
-    buffer_dict1['_type'] = 'metricsets' #({'_index':'vnf-kpi4','_type':'metricsets','_source':
+    buffer_dict1['_type'] = ES_INDEX_TYPE
     
-    #rslt_dict1 = {}
     rslt_list1 = []
     str1 = ""
 
@@ -78,12 +69,10 @@ def es_send(es_info, input):
         #str1 = str1+json.dumps(record)
         #print cnt, str1, type(str1)
         print buffer_dict1,type(buffer_dict1)
-        rslt_list1.append(buffer_dict1.copy())
+        rslt_list1.append( buffer_dict1.copy() )
         cnt=cnt+1
 
     print '+++++++++++'
-    #print str1, type(str1)
-    #print rslt_list1, type(rslt_list1)
     pprint(rslt_list1)
 
     _result = helpers.bulk(es_client, rslt_list1)    #   not string, be list
@@ -110,6 +99,7 @@ if __name__ == "__main__":
     ES_INFO='172.30.219.67:9200'
     VNF_VENDOR='F'   # Fortinet='F', PaloAlto='P'
     ES_INDEX_PREFIX='vnf-kpi'
+    ES_INDEX_TYPE='metricsets'
 
     ''' connect and get from fortios'''
     result =  get_vnf_network_kpi.get_vnf_network_kpi(f_info, a_info)
