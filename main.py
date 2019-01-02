@@ -6,6 +6,7 @@ from elasticsearch import helpers
 from pprint import pprint
 import json
 import time
+import datetime
 
 import get_vnf_network_kpi
 
@@ -17,12 +18,9 @@ def json_modify(json_str):
     for vnf in dict1.keys():       # get vnf-name
 
         buffer_dict = {}
-        #buffer_dict['@timestamp'] = dict1[vnf]['timestamp']
-        #print  dict1[vnf]['timestamp'], type(  dict1[vnf]['timestamp'] )
-        #print  int(float(dict1[vnf]['timestamp'])), type(  int(float(dict1[vnf]['timestamp'])) )
-        #buffer_dict['@timestamp'] = int(float(dict1[vnf]['timestamp']))
 
-        buffer_dict['@timestamp'] = time.strftime("%Y-%m-%dT%H:%M:%S",  time.gmtime( int(float(dict1[vnf]['timestamp']))))
+        #buffer_dict['@timestamp'] = time.strftime("%Y-%m-%dT%H:%M:%S",  time.gmtime( int(float(dict1[vnf]['timestamp']))))
+        buffer_dict['@timestamp'] = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
 
         buffer_dict['vnf'] = vnf
         buffer_dict['vnf_vendor'] = VNF_VENDOR # vnf_vendor : Fortinet
@@ -49,9 +47,10 @@ def es_send(es_info, input):
 
     es_client = Elasticsearch(es_info)
     #print es_client, type(es_client)
+    today = datetime.datetime.now().strftime('%Y.%m.%d')
 
     buffer_dict1 = {}
-    buffer_dict1['_index'] = ES_INDEX_PREFIX   # vnf-kpi, need to yyyymmdd append
+    buffer_dict1['_index'] = ES_INDEX_PREFIX+'-'+today   # vnf-kpi, need to yyyymmdd append
     buffer_dict1['_type'] = ES_INDEX_TYPE
     
     rslt_list1 = []

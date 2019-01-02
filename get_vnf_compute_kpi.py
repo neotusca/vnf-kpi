@@ -29,7 +29,7 @@ def get_vnf_compute_kpi(FOS_INFO, ACC_INFO):
             #pprint (data)
             #print type(data)  # dict
 
-            
+            ''' 
             cnt=1
             #print data['results']['cpu']['historical']['1-hour']['end']
             print vnf,'-----------------'
@@ -37,15 +37,12 @@ def get_vnf_compute_kpi(FOS_INFO, ACC_INFO):
             for record in data['results']['cpu']:
                 print cnt, record,'-----'
                 cnt=cnt+1
+            ''' 
 
-            
-
-
-            #usage['timestamp'] = data['results']['cpu']['historical']['1-hour']['end']
-            usage['cpu']       = data['results']['cpu']['current']
-            usage['mem']       = data['results']['mem']['current']
-            usage['disk']      = data['results']['disk']['current']
-            usage['session']   = data['results']['session']['current']
+            usage['cpu']       = data['results']['cpu'][0]['current']
+            usage['mem']       = data['results']['mem'][0]['current']
+            usage['disk']      = data['results']['disk'][0]['current']
+            usage['session']   = data['results']['session'][0]['current']
 
 
             '''
@@ -53,8 +50,17 @@ def get_vnf_compute_kpi(FOS_INFO, ACC_INFO):
             usage = data['results']
             usage['timestamp'] = timestamp
             '''
+
+            print '+1+++++++++++++++++++++'
+            print usage
+
         
-        TOTAL_VNF_USAGE[vnf] = usage    
+        #TOTAL_VNF_USAGE[vnf] = usage    
+        TOTAL_VNF_USAGE[vnf].copy(usage)    # dictionary  not work
+
+        print '+2+++++++++++++++++++++'
+        print TOTAL_VNF_USAGE
+
         #pprint (TOTAL_VNF_USAGE) # dict
         JSON_VNF_USAGE = json.dumps(TOTAL_VNF_USAGE)
 
@@ -69,6 +75,7 @@ if __name__ == "__main__":
     a_info={'domain':'root','id':'admin'}    # using dedicated-passwd 
 
     result =  get_vnf_compute_kpi(f_info, a_info)
-    print result
+    #print result
+    pprint (result)
 
     
