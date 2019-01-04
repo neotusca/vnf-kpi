@@ -105,10 +105,10 @@ if __name__ == "__main__":
     ES_INDEX_TYPE='metricsets'
 
     ''' connect and get from fortios'''
-    result =  get_vnf_compute_kpi.get_vnf_compute_kpi(f_info, a_info)
+    #result =  get_vnf_compute_kpi.get_vnf_compute_kpi(f_info, a_info)
 
     ''' connect and get from fortios'''
-    #result = jsonfile_reading('get_vnf_compute_kpi_success.json')
+    result = jsonfile_reading('get_vnf_compute_kpi_success.json')
 
     print '=1=========='
     print result, type(result)  # string

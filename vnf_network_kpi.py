@@ -97,7 +97,7 @@ if __name__ == "__main__":
     a_info={'domain':'root','id':'admin'}    # using dedicated-passwd 
     ES_INFO='172.30.219.67:9200'
     VNF_VENDOR='F'   # Fortinet='F', PaloAlto='P'
-    ES_INDEX_PREFIX='vnf-kpi'
+    ES_INDEX_PREFIX='vnf-kpi-network'
     ES_INDEX_TYPE='metricsets'
 
     ''' connect and get from fortios'''
