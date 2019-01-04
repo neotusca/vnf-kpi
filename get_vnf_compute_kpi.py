@@ -15,6 +15,10 @@ def get_vnf_compute_kpi(FOS_INFO, ACC_INFO):
         vnf_conn = FortigateApi.Fortigate(FOS_INFO[vnf]['ip'], ACC_INFO['domain'], ACC_INFO['id'], FOS_INFO[vnf]['pw'])
     
         Response = vnf_conn.ApiGet('monitor/system/resource/usage')    # usage history
+
+        #print '3=',Response.status_code,'=='
+        print '-logout-'
+        print FortigateApi.Fortigate.Logout(vnf_conn)
     
         if Response.status_code != 200:
             ''' abnormal process '''
@@ -34,15 +38,15 @@ def get_vnf_compute_kpi(FOS_INFO, ACC_INFO):
             usage['disk']      = data['results']['disk'][0]['current']
             usage['session']   = data['results']['session'][0]['current']
 
-            print '+1+++++++++++++++++++++'
-            print vnf, usage, type(usage)
+            #print '+1+++++++++++++++++++++'
+            #print vnf, usage, type(usage)
 
         
             TOTAL_VNF_USAGE[vnf] = {}
             TOTAL_VNF_USAGE[vnf].update(usage)    # dictionary  not work
 
-        print '+2+++++++++++++++++++++'
-        print TOTAL_VNF_USAGE
+        #print '+2+++++++++++++++++++++'
+        #print TOTAL_VNF_USAGE
 
         #pprint (TOTAL_VNF_USAGE) # dict
         JSON_VNF_USAGE = json.dumps(TOTAL_VNF_USAGE)
@@ -58,7 +62,7 @@ if __name__ == "__main__":
     a_info={'domain':'root','id':'admin'}    # using dedicated-passwd 
 
     result =  get_vnf_compute_kpi(f_info, a_info)
-    #print result
-    pprint (result)
+    print result
+    #pprint (result)
 
     
