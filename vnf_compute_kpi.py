@@ -100,7 +100,7 @@ if __name__ == "__main__":
     f_info={'fos-01':{'ip':'172.30.219.72','pw':'admin'}, 'fos-02':{'ip':'172.30.219.73','pw':'admin'}}   # using dedicated-passwd 
     a_info={'domain':'root','id':'admin'}    # using dedicated-passwd 
     ES_INFO='172.30.219.67:9200'
-    VNF_VENDOR='F'   # Fortinet='F', PaloAlto='P'
+    VNF_VENDOR='FN'   # Fortinet='FN', PaloAlto='PA'
     ES_INDEX_PREFIX='vnf-kpi-compute'
     ES_INDEX_TYPE='metricsets'
 
